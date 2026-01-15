@@ -7,6 +7,7 @@
   { "id": "faker-skt-2017", "name": "Faker", "team": "SKT", "region": "LCK", "role": "Mid", "year": "2017" },
   { "id": "faker-skt-2016", "name": "Faker", "team": "SKT", "region": "LCK", "role": "Mid", "year": "2016" },
   { "id": "faker-skt-2015", "name": "Faker", "team": "SKT", "region": "LCK", "role": "Mid", "year": "2015" },
+  { "id": "faker-skt-2013", "name": "Faker", "team": "SKT", "region": "LCK", "role": "Mid", "year": "2013" },
   { "id": "poohmandu-skt-2013", "name": "PoohManDu", "team": "SKT", "region": "LCK", "role": "Support", "year": "2013" },
   { "id": "piglet-skt-2013", "name": "Piglet", "team": "SKT", "region": "LCK", "role": "ADC", "year": "2013" },
   { "id": "impact-skt-2013", "name": "Impact", "team": "SKT", "region": "LCK", "role": "Top", "year": "2013" },
