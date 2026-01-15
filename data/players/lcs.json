@@ -1,0 +1,8 @@
+[
+  { "id": "doublelift-tl-2019", "name": "Doublelift", "team": "TL", "region": "LCS", "role": "ADC", "year": "2019" },
+  { "id": "corejj-tl-2024", "name": "CoreJJ", "team": "TL", "region": "LCS", "role": "Support", "year": "2024" },
+  { "id": "bjergsen-tsm-2016", "name": "Bjergsen", "team": "TSM", "region": "LCS", "role": "Mid", "year": "2016" },
+  { "id": "impact-tl-2019", "name": "Impact", "team": "TL", "region": "LCS", "role": "Top", "year": "2019" },
+  { "id": "massu-fly-2024", "name": "Massu", "team": "FLY", "region": "LCS", "role": "ADC", "year": "2024" },
+  { "id": "quad-fly-2024", "name": "Quad", "team": "FLY", "region": "LCS", "role": "Mid", "year": "2024" }
+]
