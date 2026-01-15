@@ -12,17 +12,12 @@ interface CardRevealProps {
 }
 
 type RevealStage = "league" | "position" | "team" | "card" | "done";
-type TeamLogoState = "png" | "svg" | "fallback";
-
-const TEAM_LOGO_EXTENSIONS: TeamLogoState[] = ["png", "svg"];
 
 export function CardReveal({ card, onComplete }: CardRevealProps) {
   const [stage, setStage] = useState<RevealStage>("league");
-  const [teamLogoState, setTeamLogoState] = useState<TeamLogoState>("png");
 
   const teamColor = TEAM_COLORS[card.team] || "#666666";
   const roleColor = ROLE_COLORS[card.role];
-  const teamNameLower = card.team.toLowerCase();
 
   const leagueLogo: Record<string, string> = {
     LCK: "/lck.svg",
@@ -30,22 +25,6 @@ export function CardReveal({ card, onComplete }: CardRevealProps) {
     LEC: "/lec.png",
     LCS: "/lcs.svg",
   };
-
-  const getTeamLogoSrc = () => {
-    if (teamLogoState === "fallback") return null;
-    return `/teams/${teamNameLower}.${teamLogoState}`;
-  };
-
-  const handleTeamLogoError = () => {
-    const currentIndex = TEAM_LOGO_EXTENSIONS.indexOf(teamLogoState as typeof TEAM_LOGO_EXTENSIONS[number]);
-    if (currentIndex < TEAM_LOGO_EXTENSIONS.length - 1) {
-      setTeamLogoState(TEAM_LOGO_EXTENSIONS[currentIndex + 1]);
-    } else {
-      setTeamLogoState("fallback");
-    }
-  };
-
-  const teamLogoSrc = getTeamLogoSrc();
 
   const skipReveal = useCallback(() => {
     setStage("done");
@@ -140,25 +119,12 @@ export function CardReveal({ card, onComplete }: CardRevealProps) {
       {/* Team Reveal */}
       {stage === "team" && (
         <div className="reveal-stage">
-          {teamLogoSrc ? (
-            <div className="animate-reveal-text">
-              <Image
-                src={teamLogoSrc}
-                alt={card.team}
-                width={200}
-                height={200}
-                className="object-contain"
-                onError={handleTeamLogoError}
-              />
-            </div>
-          ) : (
-            <div
-              className="text-7xl font-black tracking-wider animate-reveal-text"
-              style={{ color: teamColor }}
-            >
-              {card.team}
-            </div>
-          )}
+          <div
+            className="text-7xl font-black tracking-wider animate-reveal-text"
+            style={{ color: teamColor }}
+          >
+            {card.team}
+          </div>
           <div className="text-2xl text-gray-400 mt-2 animate-reveal-text-delay">
             {card.year}
           </div>
