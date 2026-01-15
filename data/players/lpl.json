@@ -1,10 +1,14 @@
 [
   { "id": "knight-blg-2024", "name": "Knight", "team": "BLG", "region": "LPL", "role": "Mid", "year": "2024" },
+  { "id": "knight-jdg-2023", "name": "Knight", "team": "JDG", "region": "LPL", "role": "Mid", "year": "2023" },
   { "id": "knight-tes-2021", "name": "Knight", "team": "TES", "region": "LPL", "role": "Mid", "year": "2021" },
   { "id": "bin-blg-2024", "name": "Bin", "team": "BLG", "region": "LPL", "role": "Top", "year": "2024" },
   { "id": "elk-blg-2024", "name": "Elk", "team": "BLG", "region": "LPL", "role": "ADC", "year": "2024" },
   { "id": "on-blg-2024", "name": "ON", "team": "BLG", "region": "LPL", "role": "Support", "year": "2024" },
   { "id": "xun-blg-2024", "name": "Xun", "team": "BLG", "region": "LPL", "role": "Jungle", "year": "2024" },
+  { "id": "baolan-ig-2018", "name": "Baolan", "team": "IG", "region": "LPL", "role": "Support", "year": "2018" },
+  { "id": "ning-ig-2018", "name": "Ning", "team": "IG", "region": "LPL", "role": "Jungle", "year": "2018" },
+  { "id": "jackylove-ig-2018", "name": "JackyLove", "team": "IG", "region": "LPL", "role": "ADC", "year": "2018" },
   { "id": "rookie-ig-2019", "name": "Rookie", "team": "IG", "region": "LPL", "role": "Mid", "year": "2019" },
   { "id": "rookie-ig-2018", "name": "Rookie", "team": "IG", "region": "LPL", "role": "Mid", "year": "2018" },
   { "id": "theshy-wbg-2023", "name": "TheShy", "team": "WBG", "region": "LPL", "role": "Top", "year": "2023" },
@@ -16,8 +20,17 @@
   { "id": "meiko-edg-2021", "name": "Meiko", "team": "EDG", "region": "LPL", "role": "Support", "year": "2021" },
   { "id": "viper-edg-2021", "name": "Viper", "team": "EDG", "region": "LPL", "role": "ADC", "year": "2021" },
   { "id": "scout-edg-2021", "name": "Scout", "team": "EDG", "region": "LPL", "role": "Mid", "year": "2021" },
+  { "id": "flandre-edg-2021", "name": "Flandre", "team": "EDG", "region": "LPL", "role": "Top", "year": "2021" },
+  { "id": "jiejie-edg-2021", "name": "Jiejie", "team": "EDG", "region": "LPL", "role": "Jungle", "year": "2021" },
   { "id": "369-tes-2024", "name": "369", "team": "TES", "region": "LPL", "role": "Top", "year": "2024" },
+  { "id": "369-jdg-2023", "name": "369", "team": "JDG", "region": "LPL", "role": "Top", "year": "2023" },
   { "id": "kanavi-jdg-2023", "name": "Kanavi", "team": "JDG", "region": "LPL", "role": "Jungle", "year": "2023" },
   { "id": "ruler-jdg-2023", "name": "ruler", "team": "JDG", "region": "LPL", "role": "ADC", "year": "2023" },
-  { "id": "ming-rng-2018", "name": "Ming", "team": "RNG", "region": "LPL", "role": "Support", "year": "2018" }
+  { "id": "missing-jdg-2023", "name": "Missing", "team": "JDG", "region": "LPL", "role": "Support", "year": "2023" },
+  { "id": "ming-rng-2018", "name": "Ming", "team": "RNG", "region": "LPL", "role": "Support", "year": "2018" },
+  { "id": "doinb-fpx-2019", "name": "Doinb", "team": "FPX", "region": "LPL", "role": "Mid", "year": "2019" },
+  { "id": "crisp-fpx-2019", "name": "Crisp", "team": "FPX", "region": "LPL", "role": "Support", "year": "2019" },
+  { "id": "gimgoon-fpx-2019", "name": "GimGoon", "team": "FPX", "region": "LPL", "role": "Top", "year": "2019" },
+  { "id": "lwx-fpx-2019", "name": "LWX", "team": "FPX", "region": "LPL", "role": "ADC", "year": "2019" },
+  { "id": "tian-fpx-2019", "name": "tian", "team": "FPX", "region": "LPL", "role": "Jungle", "year": "2019" }
 ]

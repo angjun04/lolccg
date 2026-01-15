@@ -5,8 +5,13 @@ export const TEAM_COLORS: Record<string, string> = {
   "GEN": "#AA8B2C",
   "HLE": "#FF4500",
   "DK": "#00C8B4",
+  "DWG": "#00C8B4",
   "DRX": "#0A7BFF",
   "KT": "#E2012D",
+  "SSG": "#1428A0",
+  "SSW": "#FFFFFF",
+  "ROX": "#B22222",
+  "LZ": "#00A9E0",
 
   // LPL
   "BLG": "#7EC8E3",
@@ -16,6 +21,7 @@ export const TEAM_COLORS: Record<string, string> = {
   "RNG": "#B8860B",
   "EDG": "#1A1A1A",
   "JDG": "#DC143C",
+  "FPX": "#E32636",
   "SHR": "#B8860B",
 
   // LEC

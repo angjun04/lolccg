@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { PlayerCard as PlayerCardType, ROLE_COLORS, REGION_NAMES } from "@/lib/types";
 import { TEAM_COLORS } from "@/data/teamColors";
@@ -12,12 +12,17 @@ interface CardRevealProps {
 }
 
 type RevealStage = "league" | "position" | "team" | "card" | "done";
+type TeamLogoState = "png" | "svg" | "fallback";
+
+const TEAM_LOGO_EXTENSIONS: TeamLogoState[] = ["png", "svg"];
 
 export function CardReveal({ card, onComplete }: CardRevealProps) {
   const [stage, setStage] = useState<RevealStage>("league");
+  const [teamLogoState, setTeamLogoState] = useState<TeamLogoState>("png");
 
   const teamColor = TEAM_COLORS[card.team] || "#666666";
   const roleColor = ROLE_COLORS[card.role];
+  const teamNameLower = card.team.toLowerCase();
 
   const leagueLogo: Record<string, string> = {
     LCK: "/lck.svg",
@@ -25,6 +30,39 @@ export function CardReveal({ card, onComplete }: CardRevealProps) {
     LEC: "/lec.png",
     LCS: "/lcs.svg",
   };
+
+  const getTeamLogoSrc = () => {
+    if (teamLogoState === "fallback") return null;
+    return `/teams/${teamNameLower}.${teamLogoState}`;
+  };
+
+  const handleTeamLogoError = () => {
+    const currentIndex = TEAM_LOGO_EXTENSIONS.indexOf(teamLogoState as typeof TEAM_LOGO_EXTENSIONS[number]);
+    if (currentIndex < TEAM_LOGO_EXTENSIONS.length - 1) {
+      setTeamLogoState(TEAM_LOGO_EXTENSIONS[currentIndex + 1]);
+    } else {
+      setTeamLogoState("fallback");
+    }
+  };
+
+  const teamLogoSrc = getTeamLogoSrc();
+
+  const skipReveal = useCallback(() => {
+    setStage("done");
+  }, []);
+
+  // Handle spacebar to skip reveal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        skipReveal();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [skipReveal]);
 
   useEffect(() => {
     const timings: Record<RevealStage, number> = {
@@ -102,12 +140,25 @@ export function CardReveal({ card, onComplete }: CardRevealProps) {
       {/* Team Reveal */}
       {stage === "team" && (
         <div className="reveal-stage">
-          <div
-            className="text-7xl font-black tracking-wider animate-reveal-text"
-            style={{ color: teamColor }}
-          >
-            {card.team}
-          </div>
+          {teamLogoSrc ? (
+            <div className="animate-reveal-text">
+              <Image
+                src={teamLogoSrc}
+                alt={card.team}
+                width={200}
+                height={200}
+                className="object-contain"
+                onError={handleTeamLogoError}
+              />
+            </div>
+          ) : (
+            <div
+              className="text-7xl font-black tracking-wider animate-reveal-text"
+              style={{ color: teamColor }}
+            >
+              {card.team}
+            </div>
+          )}
           <div className="text-2xl text-gray-400 mt-2 animate-reveal-text-delay">
             {card.year}
           </div>
