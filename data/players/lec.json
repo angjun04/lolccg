@@ -7,7 +7,5 @@
   { "id": "mikyx-g2-2019", "name": "Mikyx", "team": "G2", "region": "LEC", "role": "Support", "year": "2019" },
   { "id": "rekkles-fnc-2018", "name": "Rekkles", "team": "FNC", "region": "LEC", "role": "ADC", "year": "2018" },
   { "id": "hylissang-fnc-2018", "name": "Hylissang", "team": "FNC", "region": "LEC", "role": "Support", "year": "2018" },
-  { "id": "perkz-g2-2018", "name": "Perkz", "team": "G2", "region": "LEC", "role": "Mid", "year": "2018" },
-  { "id": "elyoya-mad-2024", "name": "Elyoya", "team": "MAD", "region": "LEC", "role": "Jungle", "year": "2024" },
-  { "id": "upset-fnc-2025", "name": "Upset", "team": "FNC", "region": "LEC", "role": "ADC", "year": "2025" }
+  { "id": "perkz-g2-2018", "name": "Perkz", "team": "G2", "region": "LEC", "role": "Mid", "year": "2018" }
 ]

@@ -12,7 +12,15 @@ const LEAGUE_LOGOS: Record<string, string> = {
   LCS: "/lcs.svg",
 };
 
-type ImageState = "year" | "base" | "fallback";
+function isBrightColor(hex: string): boolean {
+  const c = hex.replace("#", "");
+  const r = parseInt(c.slice(0, 2), 16);
+  const g = parseInt(c.slice(2, 4), 16);
+  const b = parseInt(c.slice(4, 6), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.7;
+}
+
 type TeamLogoState = "png" | "svg" | "fallback";
 
 const TEAM_LOGO_EXTENSIONS: TeamLogoState[] = ["png", "svg"];
@@ -21,6 +29,7 @@ interface PlayerCardProps {
   card: PlayerCardType;
   size?: "sm" | "md" | "lg";
   isNew?: boolean;
+  isUpgraded?: boolean;
   onClick?: () => void;
 }
 
@@ -28,28 +37,14 @@ export function PlayerCard({
   card,
   size = "md",
   isNew = false,
+  isUpgraded = false,
   onClick,
 }: PlayerCardProps) {
-  const [imageState, setImageState] = useState<ImageState>("year");
   const [teamLogoState, setTeamLogoState] = useState<TeamLogoState>("png");
 
   const roleColor = ROLE_COLORS[card.role];
   const teamColor = TEAM_COLORS[card.team] || "#666666";
-
-  const playerNameLower = card.name.toLowerCase();
   const teamNameLower = card.team.toLowerCase();
-  const yearShort = card.year.slice(-2);
-
-  const getImageSrc = () => {
-    if (imageState === "year") return `/players/${playerNameLower}${yearShort}.png`;
-    if (imageState === "base") return `/players/${playerNameLower}.png`;
-    return null;
-  };
-
-  const handleImageError = () => {
-    if (imageState === "year") setImageState("base");
-    else if (imageState === "base") setImageState("fallback");
-  };
 
   const getTeamLogoSrc = () => {
     if (teamLogoState === "fallback") return null;
@@ -65,7 +60,6 @@ export function PlayerCard({
     }
   };
 
-  const imageSrc = getImageSrc();
   const teamLogoSrc = getTeamLogoSrc();
 
   const sizeClasses = {
@@ -80,7 +74,7 @@ export function PlayerCard({
     lg: { name: "text-xl", team: "text-base" },
   };
 
-  return (
+  const cardElement = (
     <div
       onClick={onClick}
       className={`
@@ -92,16 +86,15 @@ export function PlayerCard({
         ${onClick ? "cursor-pointer hover:scale-105 hover:shadow-xl" : ""}
         ${isNew ? "ring-2 ring-yellow-400 ring-offset-2 ring-offset-gray-900" : ""}
       `}
-      style={{ borderColor: teamColor }}
+      style={{ borderColor: isUpgraded ? "transparent" : teamColor }}
     >
       {/* Player image - fills the card */}
-      {imageSrc ? (
+      {card.imageUrl ? (
         <Image
-          src={imageSrc}
+          src={card.imageUrl}
           alt={card.name}
           fill
           className="object-cover"
-          onError={handleImageError}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">
@@ -125,8 +118,8 @@ export function PlayerCard({
 
       {/* Year badge */}
       <div
-        className="absolute top-2 left-2 px-2 py-0.5 rounded text-xs font-bold text-white z-10"
-        style={{ backgroundColor: teamColor }}
+        className="absolute top-2 left-2 px-2 py-0.5 rounded text-xs font-bold z-10"
+        style={{ backgroundColor: teamColor, color: isBrightColor(teamColor) ? "#000" : "#fff" }}
       >
         {card.year.slice(-2)}&apos;
       </div>
@@ -173,6 +166,35 @@ export function PlayerCard({
           {card.role}
         </div>
       </div>
+
+      {/* Holographic shimmer overlay for upgraded cards */}
+      {isUpgraded && (
+        <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none z-20">
+          <div className="absolute inset-0 animate-holographic-shimmer opacity-40" />
+        </div>
+      )}
     </div>
   );
+
+  if (isUpgraded) {
+    return (
+      <div className="relative">
+        {/* Holographic glow shadow */}
+        <div
+          className="absolute -inset-4 rounded-xl opacity-70 blur-xl animate-pulse-slow"
+          style={{ background: "linear-gradient(45deg, #02FEFF, #FF88FE, #0777FD)" }}
+        />
+
+        {/* Holographic border */}
+        <div className="absolute -inset-[3px] rounded-xl animate-holographic-border" />
+
+        {/* Card */}
+        <div className="relative">
+          {cardElement}
+        </div>
+      </div>
+    );
+  }
+
+  return cardElement;
 }

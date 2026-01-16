@@ -16,8 +16,10 @@ interface RosterState {
 interface GameContextType {
   roster: RosterState;
   revealingCard: PlayerCard | null;
+  upgradedCardIds: Set<string>;
   drawCard: (role: Role) => void;
   completeReveal: () => void;
+  upgradeCards: (cardIds: string[]) => void;
   resetGame: () => void;
 }
 
@@ -40,6 +42,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
   const [revealingCard, setRevealingCard] = useState<PlayerCard | null>(null);
   const [pendingRole, setPendingRole] = useState<Role | null>(null);
+  const [upgradedCardIds, setUpgradedCardIds] = useState<Set<string>>(new Set());
 
   const drawCard = (role: Role) => {
     const card = getRandomCardForRole(role);
@@ -55,6 +58,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setPendingRole(null);
   };
 
+  const upgradeCards = (cardIds: string[]) => {
+    setUpgradedCardIds((prev) => new Set([...prev, ...cardIds]));
+  };
+
   const resetGame = () => {
     setRoster({
       Top: null,
@@ -65,6 +72,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     });
     setRevealingCard(null);
     setPendingRole(null);
+    setUpgradedCardIds(new Set());
   };
 
   return (
@@ -72,8 +80,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
       value={{
         roster,
         revealingCard,
+        upgradedCardIds,
         drawCard,
         completeReveal,
+        upgradeCards,
         resetGame,
       }}
     >
